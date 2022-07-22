@@ -166,20 +166,15 @@ class UserController extends Controller
         if(!$user ||  !Hash::check($fields['password'],$user->password) ){
             return response([
                 'message'=>"Bad email or password",
-
             ],401);
         }
-
         // generate a token for the user
         $token = $user->createToken('authToken')->plainTextToken;
-
         $response =[
             'user' => $user,
             'token' => $token
         ];
-
         return response($response, 201);
-
     }
 
     public function logout(Request $request){
