@@ -28,6 +28,7 @@ Route::get('/get-all-users', [UserController::class, 'index']);
 
 Route::get('/get-one-user/{id}', [UserController::class, 'show']);
 
+Route::get('/get-user-by-username/{name}', [UserController::class, 'search']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

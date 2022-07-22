@@ -62,6 +62,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // search for one user by id
         return UserModel::find($id);
 
     }
@@ -91,6 +92,12 @@ class UserController extends Controller
         // return $user;
     }
 
+
+    public function search($name)
+    {//search a user by name
+        return UserModel::where('name', 'like', '%'.$name)->get();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -105,4 +112,6 @@ class UserController extends Controller
         // OR
         // return UserModel::destroy($id);
     }
+
+
 }
