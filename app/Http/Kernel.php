@@ -38,9 +38,23 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
-
+/**
+ * When starting to autheticte a user, we need to install sanctum package.
+ * composer require laravel/sanctum =>installs sanctum package
+ * php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"=> creates a config file and migration data for sanctum
+ * php artisan migrate make=> creates a migration file for sanctum
+ *
+ * then replaace the api data in the protected middleware group array kernel.php file with the following:
+ *  'api' => [
+ *          \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+ *          'throttle:api',
+ *           \Illuminate\Routing\Middleware\SubstituteBindings::class,
+ *       ],
+ *
+ *
+*/
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
